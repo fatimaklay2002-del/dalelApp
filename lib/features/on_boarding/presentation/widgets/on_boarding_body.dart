@@ -1,43 +1,59 @@
 import 'package:dalel_project/core/theme/text_style.dart';
+import 'package:dalel_project/features/on_boarding/data/models/on_boarding_model.dart';
 import 'package:dalel_project/features/on_boarding/presentation/widgets/custom_smooth_page_indicator_widget.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingBody extends StatelessWidget {
-  final ImageProvider image;
-  final String title;
-  final String subTitle;
-
-  const OnBoardingBody({
-    super.key,
-    required this.image,
-    required this.title,
-    required this.subTitle,
-  });
-
+class OnBoardingWidgetBody extends StatelessWidget {
+  const OnBoardingWidgetBody({super.key, required this.controller, this.onPageChanged});
+  final PageController controller;
+  final Function(int)? onPageChanged;
   @override
   Widget build(BuildContext context) {
-    PageController _pageController = PageController();
     return SizedBox(
-      height:500,
+      height: 600,
       child: PageView.builder(
-        physics: NeverScrollableScrollPhysics(),
-      controller: _pageController,
-      itemCount: 3,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Image(image: image),
-            SizedBox(height: 20,),
-        CustomSmoothPageIndicatorWidget(pageController: _pageController),
-             SizedBox(height: 20,),
-            
-            Text(title,style: AppTextStyle.poppins500.copyWith(fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-              SizedBox(height: 16,),
-            Text(subTitle,style: AppTextStyle.poppins300,textAlign: TextAlign.center,)
-          ],
-        );
-      },
-      
-    ));
+        onPageChanged: onPageChanged,
+        physics: const BouncingScrollPhysics(),
+        controller: controller,
+        itemCount: onBoardingData.length,
+        itemBuilder: (context, index) {
+          return Column(
+            children: [
+              Container(
+                height: 290,
+                width: 343,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      onBoardingData[index].image,
+                    ),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+              CustomSmoothPageIndicatorWidget(pageController: controller),
+              const SizedBox(height: 32),
+              Text(
+                onBoardingData[index].title,
+                style: AppTextStyle.poppins500
+                    .copyWith(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                onBoardingData[index].subTitle,
+                style: AppTextStyle.poppins300,
+                textAlign: TextAlign.center,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          );
+        },
+      ),
+    );
   }
 }

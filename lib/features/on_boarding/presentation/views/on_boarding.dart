@@ -1,31 +1,51 @@
-import 'package:dalel_project/core/constants/app_assets.dart';
-import 'package:dalel_project/core/widgets/custom_button.dart';
+
+import 'package:dalel_project/core/functions/navigation.dart';
 import 'package:dalel_project/features/on_boarding/presentation/widgets/custom_nav_bar.dart';
+import 'package:dalel_project/features/on_boarding/presentation/widgets/get_button.dart';
 import 'package:dalel_project/features/on_boarding/presentation/widgets/on_boarding_body.dart';
 import 'package:flutter/material.dart';
 
-class OnBoarding extends StatelessWidget {
-  const OnBoarding({super.key});
+class OnBoardingView extends StatefulWidget {
+  const OnBoardingView({super.key});
 
+  @override
+  State<OnBoardingView> createState() => _OnBoardingViewState();
+}
+
+class _OnBoardingViewState extends State<OnBoardingView> {
+  final PageController _controller = PageController(initialPage: 0);
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body:Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             children: [
-            CustomNavBar(),
-                 SizedBox(height: 20,),
-                OnBoardingBody(image: AssetImage(Assets.assetsImagesOnboarding1), title: 'Explore The history with Dalel in a smart way', subTitle: 'Discover the wonders of history with Dalel, your ultimate guide to the past.'),
-                CustomButton(text: 'Next', onPressed: (){})
-              
-            
-        ]  ),
-        )
+              const SizedBox(height: 40),
+              CustomNavBar(
+                onTap: () {
+                  //onBoardingVisited();
+                  customReplacementNavigate(context, "/signUp");
+                },
+              ),
+              OnBoardingWidgetBody(
+                onPageChanged: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+                controller: _controller,
+              ),
+              const SizedBox(height: 88),
+              GetBoutton(currentIndex: currentIndex, controller: _controller),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
       ),
     );
-
   }
 }
