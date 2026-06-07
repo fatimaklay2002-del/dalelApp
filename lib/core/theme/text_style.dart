@@ -14,11 +14,29 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     color: AppColors.textColor
   );
+  static final  poppins500Size18 = TextStyle(
+    fontSize: 18,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    color: AppColors.deebGray
+  );
     static final  poppins300 = TextStyle(
     fontSize: 16,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w300,
     color: AppColors.textColor
+  );
+    static final  poppins600 = TextStyle(
+    fontSize: 28,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w600,
+    color: AppColors.textColor
+  );
+      static final  poppins400Size12 = TextStyle(
+    fontSize: 12,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w400,
+    color: AppColors.deebGray
   );
     static final  buttonTextStyle = TextStyle(
     fontSize: 18,
