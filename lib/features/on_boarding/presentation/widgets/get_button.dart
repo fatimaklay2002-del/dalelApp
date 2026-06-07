@@ -38,7 +38,7 @@ class GetBoutton extends StatelessWidget {
               AppStrings.signIn,
               style: AppTextStyle.poppins300.copyWith(
                 fontSize: 16,
-                color: AppColors.deebBrown,
+                color: AppColors.deepBrown,
               ),
             ),
           ),

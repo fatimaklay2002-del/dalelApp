@@ -1,4 +1,3 @@
-
 import 'package:dalel_project/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +20,7 @@ class _CheckBoxWidgetsState extends State<CheckBoxWidgets> {
           value = newValue!;
         });
       },
-      side: BorderSide(color: AppColors.gray),
+      side: BorderSide(color: AppColors.lightgray),
     );
   }
 }

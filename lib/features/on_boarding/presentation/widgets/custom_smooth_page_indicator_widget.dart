@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CustomSmoothPageIndicatorWidget extends StatelessWidget {
-    final PageController pageController;
+  final PageController pageController;
 
-   const CustomSmoothPageIndicatorWidget({super.key, required this.pageController});
+  const CustomSmoothPageIndicatorWidget({
+    super.key,
+    required this.pageController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +16,10 @@ class CustomSmoothPageIndicatorWidget extends StatelessWidget {
       controller: pageController,
       count: 3,
       effect: ExpandingDotsEffect(
-        activeDotColor: AppColors.deebBrown,
+        activeDotColor: AppColors.deepBrown,
         dotHeight: 7,
         dotWidth: 10,
       ),
     );
   }
-
 }

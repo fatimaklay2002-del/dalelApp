@@ -1,6 +1,4 @@
-import 'package:dalel_project/core/constants/app_colors.dart';
 import 'package:dalel_project/core/constants/app_strings.dart';
-import 'package:dalel_project/core/theme/text_style.dart';
 import 'package:dalel_project/core/widgets/custom_button.dart';
 import 'package:dalel_project/features/auth/presentation/widgets/custom_text_field.dart';
 import 'package:dalel_project/features/auth/presentation/widgets/have_an_account_widget.dart';
