@@ -2,20 +2,25 @@ import 'package:dalel_project/core/constants/app_colors.dart';
 import 'package:dalel_project/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextFormField extends StatefulWidget {
   final String labelText;
-  const CustomTextField({super.key, required this.labelText});
+  final Function(String)? onChanged;
+  final Function(String)? onSubmitted;
+
+  const CustomTextFormField({super.key, required this.labelText, this.onChanged, this.onSubmitted});
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 24.0),
-      child: TextField(
+      child: TextFormField(
+        onChanged: widget.onChanged,
+        onFieldSubmitted: widget.onSubmitted,
         decoration: InputDecoration(
           border: _getBorder(),
           focusedBorder: _getBorder(),
