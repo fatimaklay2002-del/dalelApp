@@ -19,6 +19,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 24.0),
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return 'Please enter ${widget.labelText.toLowerCase()}';
+          }
+          return null;
+        },
+          
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onSubmitted,
         decoration: InputDecoration(
@@ -28,6 +35,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           fillColor: Colors.white,
           labelText: widget.labelText,
           labelStyle: AppTextStyle.poppins500Size18,
+          
         ),
       ),
     );
