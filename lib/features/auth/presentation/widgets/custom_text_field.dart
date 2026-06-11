@@ -6,8 +6,9 @@ class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
-
-  const CustomTextFormField({super.key, required this.labelText, this.onChanged, this.onSubmitted});
+   final bool? obscureText;
+  final Widget? suffixIcon;
+  const CustomTextFormField({super.key, required this.labelText, this.onChanged, this.onSubmitted, this.suffixIcon, this.obscureText});
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -28,6 +29,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           
         onChanged: widget.onChanged,
         onFieldSubmitted: widget.onSubmitted,
+        obscureText: widget.obscureText ?? false,
         decoration: InputDecoration(
           border: _getBorder(),
           focusedBorder: _getBorder(),
@@ -35,7 +37,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           fillColor: Colors.white,
           labelText: widget.labelText,
           labelStyle: AppTextStyle.poppins500Size18,
-          
+          suffixIcon: widget.suffixIcon,
         ),
       ),
     );

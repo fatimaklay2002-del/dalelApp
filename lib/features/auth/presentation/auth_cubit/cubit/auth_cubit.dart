@@ -6,37 +6,49 @@ import 'package:meta/meta.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
-   String? firstName;
-   String? lastName;
-   String? email;
-   String? password; 
-   GlobalKey<FormState> signUpKey = GlobalKey();
-   bool? isTermsAndConditionCheckBoxValue=false;
-
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? password;
+  GlobalKey<FormState> signUpKey = GlobalKey();
+  bool? isTermsAndConditionCheckBoxValue = false;
+  bool? isObscurePasswordText = true;
 
   signUpWithEmailAndPassword() async {
     try {
       emit(SignUpLoadingState());
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email!, password: password!);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email!,
+        password: password!,
+      );
       emit(SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
-      
       if (e.code == 'weak-password') {
-        emit(SignUpFailureState(errorMessage:'An error occurredThe password provided is too weak.'));
+        emit(
+          SignUpFailureState(
+            errorMessage: 'An error occurredThe password provided is too weak.',
+          ),
+        );
       } else if (e.code == 'email-already-in-use') {
-        emit(SignUpFailureState(errorMessage:'An error occurredThe account already exists for that email.'));
+        emit(
+          SignUpFailureState(
+            errorMessage:
+                'An error occurredThe account already exists for that email.',
+          ),
+        );
       }
     } catch (e) {
-      emit(SignUpFailureState(errorMessage:e.toString()));
+      emit(SignUpFailureState(errorMessage: e.toString()));
     }
   }
 
-
-updateTermsAndConditionCheckBox({ required bool value}) {
-  isTermsAndConditionCheckBoxValue = value;
-  emit(UpdateTermsAndConditionCheckBoxState());
-    
+  updateTermsAndConditionCheckBox({required bool value}) {
+    isTermsAndConditionCheckBoxValue = value;
+    emit(UpdateTermsAndConditionCheckBoxState());
   }
 
+  obscurePasswordTextValue(bool value) {
+    isObscurePasswordText = value;
+    emit(ObscurePasswordTextValueState());
+  }
 }
