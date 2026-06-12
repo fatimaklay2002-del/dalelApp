@@ -1,4 +1,5 @@
 import 'package:dalel_project/core/constants/app_strings.dart';
+import 'package:dalel_project/core/functions/navigation.dart';
 import 'package:dalel_project/features/auth/presentation/widgets/custom_sign_up_form.dart';
 
 import 'package:dalel_project/features/auth/presentation/widgets/have_an_account_widget.dart';
@@ -32,10 +33,11 @@ class _SignUpViewState extends State<SignUpView> {
               child: CustomSignUpForm(),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 16)),
-            const SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: HaveAnAccount(
                 text1: AppStrings.alreadyHaveAnAccount,
                 text2: AppStrings.signIn,
+                onTap: () => customReplacementNavigate(context, "/signIn"),
               ),
             ),
           ],

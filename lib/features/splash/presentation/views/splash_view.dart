@@ -4,6 +4,7 @@ import 'package:dalel_project/core/di/injection.dart';
 import 'package:dalel_project/core/functions/navigation.dart';
 import 'package:dalel_project/core/theme/text_style.dart';
 import 'package:dalel_project/features/on_boarding/presentation/views/on_boarding.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
@@ -16,10 +17,16 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   initState() {
-    getIt.get<CacheHelper>().getData(key: "isOnBoardingVisited") == true
-        ? delayNavigate(context, "/signUp")
-        : delayNavigate(context, "/onboarding");
-  
+    bool isOnBoardingVisited =
+        getIt.get<CacheHelper>().getData(key: "isOnBoardingVisited") ?? false;
+    if (isOnBoardingVisited == true) {
+      FirebaseAuth.instance.currentUser == null
+          ? delayNavigate(context, "/signUp")
+          : delayNavigate(context, "/home");
+    } else {
+      delayNavigate(context, "/onboarding");
+    }
+
     super.initState();
   }
 
@@ -33,7 +40,7 @@ class _SplashViewState extends State<SplashView> {
   }
 }
 
-void delayNavigate(context,path) {
+void delayNavigate(context, path) {
   Future.delayed(const Duration(seconds: 3), () {
     customReplacementNavigate(context, path);
   });
