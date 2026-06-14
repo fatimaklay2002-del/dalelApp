@@ -3,7 +3,7 @@ import 'package:dalel_project/core/functions/navigation.dart';
 import 'package:dalel_project/features/auth/presentation/widgets/custom_sign_up_form.dart';
 
 import 'package:dalel_project/features/auth/presentation/widgets/have_an_account_widget.dart';
-import 'package:dalel_project/features/search/custom_welcome_widget.dart';
+import 'package:dalel_project/features/auth/presentation/widgets/custom_welcome_widget.dart';
 import 'package:flutter/material.dart';
 
 class SignUpView extends StatefulWidget {
@@ -25,7 +25,7 @@ class _SignUpViewState extends State<SignUpView> {
               child: SizedBox(height: 108), // Add some spacing at the top
             ),
             const SliverToBoxAdapter(
-              child: WelcomeWidget(teext: AppStrings.welcome),
+              child: WelcomeWidget(text: AppStrings.welcome),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
           

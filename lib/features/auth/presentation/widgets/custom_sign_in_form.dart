@@ -1,0 +1,81 @@
+import 'package:dalel_project/core/constants/app_colors.dart';
+import 'package:dalel_project/core/constants/app_strings.dart';
+import 'package:dalel_project/core/functions/navigation.dart';
+import 'package:dalel_project/core/functions/show_toast.dart';
+import 'package:dalel_project/core/widgets/custom_button.dart';
+import 'package:dalel_project/features/auth/presentation/auth_cubit/cubit/auth_cubit.dart';
+import 'package:dalel_project/features/auth/presentation/auth_cubit/cubit/auth_state.dart';
+import 'package:dalel_project/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:dalel_project/features/auth/presentation/widgets/forget_password_text_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+class CustomSignInForm extends StatelessWidget {
+  const CustomSignInForm({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is SignInSuccessState) {
+          showToastMassege('Welcome back !');
+          customReplacementNavigate(context, '/home');
+        }
+        else if (state is SignInFailureState) {
+          showToastMassege(state.errorMessage);
+        }
+      },
+      builder: (context, state) {
+        AuthCubit authCubit = BlocProvider.of<AuthCubit>(context);
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Form(
+            key: authCubit.signUpKey,
+            child: Column(
+              children: [
+                CustomTextFormField(
+                  labelText: AppStrings.emailAddress,
+                  onChanged: (email) {
+                    authCubit.email = email;
+                  },
+                ),
+                CustomTextFormField(
+                  labelText: AppStrings.password,
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      authCubit.isObscurePasswordText == true
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
+                    onPressed: () {
+                      authCubit.obscurePasswordTextValue(
+                        !(authCubit.isObscurePasswordText ?? true),
+                      );
+                    },
+                  ),
+                  obscureText: authCubit.isObscurePasswordText,
+                  onChanged: (password) {
+                    authCubit.password = password;
+                  },
+                ),
+                SizedBox(height: 8),
+                ForgetPasswordTextWidget(),
+                SizedBox(height: 102),
+                state is SignInLoadingState
+                    ? CircularProgressIndicator(color: AppColors.primaryColor)
+                    : CustomButton(
+                        text: AppStrings.signIn,
+                        onPressed: () {
+                          if (authCubit.signInKey.currentState!.validate()) {
+                            authCubit.signInWithEmailAndPassword();
+                          }
+                        },
+                      ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

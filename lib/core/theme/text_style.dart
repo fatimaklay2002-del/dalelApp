@@ -38,6 +38,12 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w400,
     color: AppColors.deepGray,
   );
+  static final saira700Size32 = TextStyle(
+    fontSize: 32,
+    fontFamily: 'Saira',
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+  );
   static final buttonTextStyle = TextStyle(
     fontSize: 18,
     fontFamily: 'Poppins',
