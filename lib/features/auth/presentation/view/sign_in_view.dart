@@ -32,7 +32,7 @@ class _SignInViewState extends State<SignInView> {
             child: HaveAnAccount(
               text1: AppStrings.dontHaveAnAccount,
               text2: AppStrings.signUp,
-              onTap: () => customReplacementNavigate(context, '/signUp'),
+              onTap: (){ customReplacementNavigate(context, '/signUp') ;}
             ),
           ),
         ],

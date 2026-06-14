@@ -30,7 +30,7 @@ class CustomSignInForm extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Form(
-            key: authCubit.signUpKey,
+            key: authCubit.signInKey,
             child: Column(
               children: [
                 CustomTextFormField(

@@ -53,26 +53,29 @@ class AuthCubit extends Cubit<AuthState> {
     emit(ObscurePasswordTextValueState());
   }
 
-  signInWithEmailAndPassword() async {
-    try {
-      emit(SignInLoadingState());
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email!,
-        password: password!,
-      );
-      emit(SignInSuccessState());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(SignInFailureState(errorMessage: 'No user found for that email.'));
-      } else if (e.code == 'wrong-password') {
-        emit(
-          SignInFailureState(
-            errorMessage: 'Wrong password provided for that user.',
-          ),
-        );
-      }
-    }catch (e) {
-      emit(SignInFailureState(errorMessage: e.toString()));
+  Future<void> signInWithEmailAndPassword() async {
+  try {
+    emit(SignInLoadingState());
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email!,
+      password: password!,
+    );
+    emit(SignInSuccessState());
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      emit(SignInFailureState(errorMessage: 'No user found for that email.'));
+    } else if (e.code == 'wrong-password') {
+      emit(SignInFailureState(errorMessage: 'Wrong password provided for that user.'));
+    } else if (e.code == 'invalid-credential') {
+      // 💡 هذا الكود الجديد المشهور جداً في فايربيس حالياً
+      emit(SignInFailureState(errorMessage: 'Invalid email or password.'));
+    } else {
+      // ⚠️ هاد السطر السحري اللي بيمنع التعليق! 
+      // إذا طلع أي خطأ تاني من فايربيس رح يبعته للـ UI والتحميل يوقف
+      emit(SignInFailureState(errorMessage: e.message ?? 'Authentication failed.'));
     }
+  } catch (e) {
+    emit(SignInFailureState(errorMessage: e.toString()));
   }
+}
 }
