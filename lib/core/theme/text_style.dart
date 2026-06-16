@@ -39,7 +39,7 @@ abstract class AppTextStyle {
     color: AppColors.deepGray,
   );
   static final saira700Size32 = TextStyle(
-    fontSize: 32,
+    fontSize: 42,
     fontFamily: 'Saira',
     fontWeight: FontWeight.w700,
     color: Colors.white,

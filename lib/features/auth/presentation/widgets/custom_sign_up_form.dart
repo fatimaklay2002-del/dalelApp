@@ -79,10 +79,10 @@ class CustomSignUpForm extends StatelessWidget {
               CustomButton(
                 color: authCubit.isTermsAndConditionCheckBoxValue == true ? null : AppColors.lightgray,
                 text: AppStrings.signUp,
-                onPressed: () {
+                onPressed: () async {
                   if(authCubit.isTermsAndConditionCheckBoxValue == true) {
                     if (authCubit.signUpKey.currentState!.validate()) {
-                      authCubit.signUpWithEmailAndPassword();
+                    await  authCubit.signUpWithEmailAndPassword();
                     }
                   }
                 },
