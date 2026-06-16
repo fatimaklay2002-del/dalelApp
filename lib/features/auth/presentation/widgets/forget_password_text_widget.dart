@@ -1,4 +1,5 @@
 import 'package:dalel_project/core/constants/app_strings.dart';
+import 'package:dalel_project/core/functions/navigation.dart';
 import 'package:dalel_project/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,11 @@ class ForgetPasswordTextWidget extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          customReplacementNavigate(context, '/forgotPassword');
+        },
         child: Text(
-        AppStrings.forgotPassword,
+          AppStrings.forgotPassword,
           style: AppTextStyle.poppins600.copyWith(
             fontSize: 12,
             color: Color(0xFF6F6460),
