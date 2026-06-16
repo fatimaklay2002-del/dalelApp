@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalel_project/features/auth/presentation/auth_cubit/cubit/auth_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -22,6 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: email!,
         password: password!,
       );
+      addUserProfile();
       verifyEmail();
       emit(SignUpSuccessState());
     } on FirebaseAuthException catch (e) {
@@ -44,6 +46,15 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(SignUpFailureState(errorMessage: e.toString()));
     }
+  }
+
+  addUserProfile() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users.add({
+      'first_name': firstName, // John Doe
+      'last_name': lastName, // Stokes and Sons
+      'email': email,
+    });
   }
 
   verifyEmail() async {
