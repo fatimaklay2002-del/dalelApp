@@ -14,6 +14,12 @@ abstract class AppTextStyle {
     fontWeight: FontWeight.w500,
     color: AppColors.textColor,
   );
+  static final poppins500Size16 = TextStyle(
+    fontSize: 16,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w500,
+    color: AppColors.deepBrown,
+  );
   static final poppins500Size18 = TextStyle(
     fontSize: 18,
     fontFamily: 'Poppins',
@@ -37,6 +43,12 @@ abstract class AppTextStyle {
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w400,
     color: AppColors.deepGray,
+  );
+  static final poppins400Size20 = TextStyle(
+    fontSize: 20,
+    fontFamily: 'Poppins',
+    fontWeight: FontWeight.w400,
+    color: AppColors.deepBrown,
   );
   static final saira700Size32 = TextStyle(
     fontSize: 42,
