@@ -1,14 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dalel_project/core/constants/app_strings.dart';
 import 'package:dalel_project/core/widgets/custom_header_text.dart';
 import 'package:dalel_project/features/home/presentation/widgets/historical_periods_widget.dart';
 import 'package:flutter/material.dart';
+
+FirebaseFirestore firestore = FirebaseFirestore.instance;
 
 class HistoricalPeriodsSection extends StatelessWidget {
   const HistoricalPeriodsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -18,6 +22,7 @@ class HistoricalPeriodsSection extends StatelessWidget {
         HistoricalPeriods(),
         SizedBox(height: 32),
       ],
+    
     );
   }
 }
